@@ -1,0 +1,96 @@
+#include<iostream>
+#include<cstdlib>
+
+class bank {
+    char name[100], add[100], y;
+    int balance;
+
+public:
+    void open_account();
+    void deposit_money();
+    void withdraw_money();
+    void display_account();
+};
+
+void bank::open_account() {
+    std::cout << "Enter your full name: ";
+    std::cin.ignore();
+    std::cin.getline(name, 100);
+    std::cout << "Enter your address: ";
+    std::cin.ignore();
+    std::cin.getline(add, 100);
+    std::cout << "What type of account are you going to open (s for saving, c for current): ";
+    std::cin >> y;
+    std::cout << "Enter initial balance: ";
+    std::cin >> balance;
+    std::cout << "Your account is created." << std::endl;
+}
+
+void bank::deposit_money() {
+    int a;
+    std::cout << "Enter how much you want to deposit: ";
+    std::cin >> a;
+    balance += a;
+    std::cout << "Total amount after deposit: " << balance << std::endl;
+}
+
+void bank::display_account() {
+    std::cout << "Your full name: " << name << std::endl;
+    std::cout << "Your address: " << add << std::endl;
+    std::cout << "Type of account: " << y << std::endl;
+    std::cout << "Current balance: " << balance << std::endl;
+}
+
+void bank::withdraw_money() {
+    float amount;
+    std::cout << "Enter amount to withdraw: ";
+    std::cin >> amount;
+    balance = balance - amount;
+    std::cout << "Now total amount left: " << balance << std::endl;
+}
+
+int main() {
+    int ch, x;
+    bank obj;
+
+    do {
+        std::cout << "1) Open account\n";
+        std::cout << "2) Deposit money\n";
+        std::cout << "3) Withdraw money\n";
+        std::cout << "4) Display account\n";
+        std::cout << "5) Exit\n";
+        std::cout << "Select the option from above: ";
+        std::cin >> ch;
+
+        switch(ch) {
+            case 1:
+                obj.open_account();
+                break;
+
+            case 2:
+                obj.deposit_money();
+                break;
+
+            case 3:
+                obj.withdraw_money();
+                break;
+
+            case 4:
+                obj.display_account();
+                break;
+
+            case 5:
+                exit(1);
+                break;
+
+            default:
+                std::cout << "This option does not exist. Please try again.\n";
+        }
+
+        std::cout << "Do you want to select the next option? (y/n): ";
+        std::cin >> x;
+
+    } while (x == 'y' || x == 'Y');
+
+    return 0;
+}
